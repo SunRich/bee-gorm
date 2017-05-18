@@ -192,7 +192,7 @@ func (tb *Table) String() string {
 }
 
 // String returns the source code string of a field in Table struct
-// It maps to a column in database table. e.g. Id int `orm:"column(id);auto"`
+// It maps to a column in database table. e.g. Id int `gorm:"column(id);auto"`
 func (col *Column) String() string {
 	return fmt.Sprintf("%s %s %s", col.Name, col.Type, col.Tag.String())
 }
@@ -252,7 +252,7 @@ func (tag *OrmTag) String() string {
 	if len(ormOptions) == 0 {
 		return ""
 	}
-	return fmt.Sprintf("`orm:\"%s\"`", strings.Join(ormOptions, ";"))
+	return fmt.Sprintf("`gorm:\"%s\"`", strings.Join(ormOptions, ";"))
 }
 
 func generateAppcode(driver, connStr, level, tables, currpath string) {
