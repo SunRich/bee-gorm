@@ -201,13 +201,13 @@ func (col *Column) String() string {
 func (tag *OrmTag) String() string {
 	var ormOptions []string
 	if tag.Column != "" {
-		ormOptions = append(ormOptions, fmt.Sprintf("column(%s)", tag.Column))
+		ormOptions = append(ormOptions, fmt.Sprintf("column:%s", tag.Column))
 	}
 	if tag.Auto {
 		ormOptions = append(ormOptions, "auto")
 	}
 	if tag.Size != "" {
-		ormOptions = append(ormOptions, fmt.Sprintf("size(%s)", tag.Size))
+		ormOptions = append(ormOptions, fmt.Sprintf("size:%s", tag.Size))
 	}
 	if tag.Type != "" {
 		ormOptions = append(ormOptions, fmt.Sprintf("type(%s)", tag.Type))
@@ -997,7 +997,6 @@ import (
 	"reflect"
 	"strings"
 	{{timePkg}}
-	"github.com/astaxie/beego/orm"
 )
 
 {{modelStruct}}
