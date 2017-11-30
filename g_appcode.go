@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	OModel byte = 1 << iota
+	OModel      byte = 1 << iota
 	OController
 	ORouter
 )
@@ -204,7 +204,7 @@ func (tag *OrmTag) String() string {
 		ormOptions = append(ormOptions, fmt.Sprintf("column:%s", tag.Column))
 	}
 	if tag.Auto {
-		ormOptions = append(ormOptions, "auto")
+		ormOptions = append(ormOptions, "AUTO_INCREMENT")
 	}
 	if tag.Size != "" {
 		ormOptions = append(ormOptions, fmt.Sprintf("size:%s", tag.Size))
@@ -240,13 +240,13 @@ func (tag *OrmTag) String() string {
 		ormOptions = append(ormOptions, "rel(m2m)")
 	}
 	if tag.Pk {
-		ormOptions = append(ormOptions, "pk")
+		ormOptions = append(ormOptions, "primary_key")
 	}
 	if tag.Unique {
 		ormOptions = append(ormOptions, "unique")
 	}
 	if tag.Default != "" {
-		ormOptions = append(ormOptions, fmt.Sprintf("default(%s)", tag.Default))
+		ormOptions = append(ormOptions, fmt.Sprintf("default:'%s'", tag.Default))
 	}
 
 	if len(ormOptions) == 0 {
@@ -409,6 +409,7 @@ func (mysqlDB *MysqlDB) GetColumns(db *sql.DB, table *Table, blackList map[strin
 	if err != nil {
 		logger.Fatalf("Could not query the database: %s", err)
 	}
+
 	defer colDefRows.Close()
 
 	for colDefRows.Next() {
@@ -422,6 +423,7 @@ func (mysqlDB *MysqlDB) GetColumns(db *sql.DB, table *Table, blackList map[strin
 
 		// create a column
 		col := new(Column)
+
 		col.Name = camelCase(colName)
 		col.Type, err = mysqlDB.GetGoDataType(dataType)
 		if err != nil {
@@ -467,6 +469,9 @@ func (mysqlDB *MysqlDB) GetColumns(db *sql.DB, table *Table, blackList map[strin
 							logger.Fatalf("%s", err)
 						}
 					}
+				}
+				if columnDefault != "" {
+					tag.Default = columnDefault
 				}
 				if isSQLStringType(dataType) {
 					tag.Size = extractColSize(columnType)
