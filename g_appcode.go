@@ -992,10 +992,6 @@ const (
 	ModelTPL = `package models
 
 import (
-	"errors"
-	"fmt"
-	"reflect"
-	"strings"
 	{{timePkg}}
 )
 
