@@ -63,17 +63,17 @@ type MvcPath struct {
 
 // typeMapping maps SQL data type to corresponding Go data type
 var typeMappingMysql = map[string]string{
-	"int":                "int", // int signed
-	"integer":            "int",
-	"tinyint":            "int8",
-	"smallint":           "int16",
-	"mediumint":          "int32",
+	"int":                "int64", // int signed
+	"integer":            "int64",
+	"tinyint":            "int64",
+	"smallint":           "int64",
+	"mediumint":          "int64",
 	"bigint":             "int64",
-	"int unsigned":       "uint", // int unsigned
-	"integer unsigned":   "uint",
-	"tinyint unsigned":   "uint8",
-	"smallint unsigned":  "uint16",
-	"mediumint unsigned": "uint32",
+	"int unsigned":       "uint64", // int unsigned
+	"integer unsigned":   "uint64",
+	"tinyint unsigned":   "uint64",
+	"smallint unsigned":  "uint64",
+	"mediumint unsigned": "uint64",
 	"bigint unsigned":    "uint64",
 	"bit":                "uint64",
 	"bool":               "bool",   // boolean
