@@ -435,7 +435,7 @@ func (mysqlDB *MysqlDB) GetColumns(db *sql.DB, table *Table, blackList map[strin
 		tag.Column = colName
 		if table.Pk == colName {
 			col.Name = "Id"
-			col.Type = "int"
+			col.Type = "int64"
 			if extra == "auto_increment" {
 				tag.Auto = true
 			} else {
