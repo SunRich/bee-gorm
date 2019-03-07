@@ -69,13 +69,13 @@ var typeMappingMysql = map[string]string{
 	"smallint":           "int64",
 	"mediumint":          "int64",
 	"bigint":             "int64",
-	"int unsigned":       "uint64", // int unsigned
-	"integer unsigned":   "uint64",
-	"tinyint unsigned":   "uint64",
-	"smallint unsigned":  "uint64",
-	"mediumint unsigned": "uint64",
-	"bigint unsigned":    "uint64",
-	"bit":                "uint64",
+	"int unsigned":       "int64", // int unsigned
+	"integer unsigned":   "int64",
+	"tinyint unsigned":   "int64",
+	"smallint unsigned":  "int64",
+	"mediumint unsigned": "int64",
+	"bigint unsigned":    "int64",
+	"bit":                "int64",
 	"bool":               "bool",   // boolean
 	"enum":               "string", // enum
 	"set":                "string", // set
@@ -206,7 +206,7 @@ func (tag *OrmTag) String() string {
 	if tag.Auto {
 		ormOptions = append(ormOptions, "AUTO_INCREMENT")
 	}
-	if tag.Size != "" {
+	/*if tag.Size != "" {
 		ormOptions = append(ormOptions, fmt.Sprintf("size:%s", tag.Size))
 	}
 	if tag.Type != "" {
@@ -248,7 +248,7 @@ func (tag *OrmTag) String() string {
 	if tag.Default != "" {
 		ormOptions = append(ormOptions, fmt.Sprintf("default:'%s'", tag.Default))
 	}
-
+	*/
 	if len(ormOptions) == 0 {
 		return ""
 	}
